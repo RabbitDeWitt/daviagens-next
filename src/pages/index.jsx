@@ -1,8 +1,28 @@
 import Head from 'next/head'
 import { Carousel, DestinationCard, PromotionCard } from '@/components'
 import { listaDestinos } from '@/constants/data'
+import { useEffect, useState } from 'react'
 
 export default function Home() {
+
+  const [carouselDestinos, setCarouselDestinos] = useState([])
+  const [destinos, setDestinos] = useState([])
+  const [promocoes, setPromocoes] = useState([])
+
+
+  useEffect(() => {
+    let numeros = []
+    while (numeros.length < 7) {
+      let num = Math.floor(Math.random() * listaDestinos.length)
+      if (numeros.indexOf(num) === -1) numeros.push(num)
+    }
+
+
+    setCarouselDestinos(numeros.slice(0, 3))
+    setDestinos(numeros.slice(3, 5))
+    setPromocoes(numeros.slice(5, 7))
+  }, [])
+
   return (
     <>
       <Head>
@@ -12,6 +32,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
+
+        <Carousel carouselDestinos={carouselDestinos} />
 
 
         <section className="container my-5 d-flex gap-5 " id="destinos">
@@ -23,12 +45,15 @@ export default function Home() {
               culturas
               fascinantes, viva experiências únicas que ficarão gravadas em sua alma para sempre!
             </p>
-            <a className="btn btn-primary" href="../destinos/destinos.html">Ver mais destinos</a>
+            <a className="btn btn-primary" href="/destinos">Ver mais destinos</a>
           </div>
 
           <div className="card-section d-flex gap-3">
-            <DestinationCard destino={listaDestinos[2]} />
-            <DestinationCard destino={listaDestinos[5]} />
+            {destinos.map((destino, i) => (
+              <DestinationCard
+                key={i}
+                destino={listaDestinos[destino]} />
+            ))}
           </div>
 
         </section>
@@ -42,12 +67,15 @@ export default function Home() {
               memórias
               inesquecíveis, enquanto aproveita descontos exclusivos para viver experiências únicas pelo globo.
             </p>
-            <a className="btn btn-primary" href="../promocoes/promocoes.html">Ver mais promoções</a>
+            <a className="btn btn-primary" href="/promocoes">Ver mais promoções</a>
           </div>
 
           <div className="card-section d-flex gap-3">
-            <PromotionCard destino={listaDestinos[7]} />
-            <PromotionCard destino={listaDestinos[0]} />
+            {promocoes.map((destino, i) => (
+              <PromotionCard
+                key={i}
+                destino={listaDestinos[destino]} />
+            ))}
           </div>
         </section>
 

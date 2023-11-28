@@ -1,15 +1,25 @@
+import { listaDestinos } from '@/constants/data'
 import React from 'react'
 
-const Carousel = ({ destinos }) => {
+const Carousel = ({ carouselDestinos }) => {
+
+  const nums = [...carouselDestinos]
+  let destinos = []
+  nums.map(num => {
+    destinos.push(listaDestinos[num])
+  })
+
   return (
     <div id="carouselExampleFade" className="carousel slide carousel-fade" data-bs-ride="carousel">
       <div className="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleFade" data-bs-slide-to="0" className="active"
-          aria-current="true" aria-label="Slide 0"></button>
+        {destinos.map((_, i) => (
+          <button key={i} type="button" data-bs-target="#carouselExampleFade" data-bs-slide-to={i} className={`${i === 0 ? 'active' : ''}`}
+            aria-current="true" aria-label="Slide 0"></button>
+        ))}
       </div>
+
+
       <div className="carousel-inner">
-
-
         <div className="bloco">
           <h1 style={{ color: 'white' }}>Daviagens</h1>
           <p style={{ color: 'white' }}>
@@ -17,15 +27,18 @@ const Carousel = ({ destinos }) => {
           </p>
         </div>
 
-        <div className="carousel-item active" data-bs-interval="5000">
-          <img src="/imgs/urca.jpg" className="d-block w-100" alt="Imagem de ${nome}" />
-          <div className="carousel-caption px-2 d-none d-md-block">
-            <h4>Rio de Janeiro</h4>
-            <p>"Rio de Janeiro, beleza que inspira."</p>
+        {destinos.map(({ img, nome, descricao }, i) => (
+          <div key={i} className={`carousel-item ${i === 0 ? 'active' : ''}`} data-bs-interval="5000">
+            <img src={`/imgs/${img}.jpg`} className="d-block w-100" alt={`Imagem de ${nome}`} />
+            <div className="carousel-caption px-2 d-none d-md-block">
+              <h4>{nome}</h4>
+              <p>{descricao}</p>
+            </div>
           </div>
-        </div>
+        ))}
 
       </div>
+
     </div>
   )
 }

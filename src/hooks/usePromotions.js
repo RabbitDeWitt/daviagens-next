@@ -2,6 +2,8 @@ import { listaDestinos } from "@/constants/data"
 import { useState } from "react"
 
 const usePromotions = () => {
+  const destinosOrdenados = listaDestinos.sort((a, b) => a.nome < b.nome ? -1 : 1)
+
   const [destinos, setDestinos] = useState(listaDestinos)
 
   const ordemDestino = [...destinos]
