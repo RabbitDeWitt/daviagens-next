@@ -1,0 +1,23 @@
+@import "../_globals/variables";
+
+
+#nacionais,
+#internacionais {
+  max-width: 1116px !important;
+}
+
+h1 {
+  font-size: 40px;
+}
+
+h2 {
+  font-size: 32px;
+}
+
+p {
+  font-size: 16px;
+}
+
+.card {
+  @include card();
+}

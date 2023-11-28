@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap');
+
+$font-principal: 'Comfortaa', sans-serif;
+
+$azul-principal: hsl(193, 82%, 44%);
+$azul-claro: hsl(198, 47%, 79%);
+$bg-color: hsl(211, 21%, 15%) !default;
+$bg-card: hsla(212, 100%, 5%, 75%);
+$bg-footer: hsl(211, 57%, 7%);
+
+$header-height: 68px;
+
+
+@mixin card() {
+  background-color: $bg-card;
+  color: #fff;
+
+  h5 {
+    text-align: center;
+    font-size: 20px;
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+  li {
+    background-color: $azul-claro;
+
+    p:nth-of-type(1) {
+      color: $bg-footer !important;
+    }
+
+    p:nth-of-type(2) {
+      color: $bg-card !important;
+    }
+  }
+
+  button {
+    font-size: 16px;
+  }
+
+}

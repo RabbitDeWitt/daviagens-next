@@ -1,0 +1,41 @@
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap");
+#nacionais,
+#internacionais {
+  max-width: 1116px !important;
+}
+
+h1 {
+  font-size: 40px;
+}
+
+h2 {
+  font-size: 32px;
+}
+
+p {
+  font-size: 16px;
+}
+
+.card {
+  background-color: hsla(212, 100%, 5%, 0.75);
+  color: #fff;
+}
+.card h5 {
+  text-align: center;
+  font-size: 20px;
+}
+.card p {
+  font-size: 16px;
+}
+.card li {
+  background-color: hsl(198, 47%, 79%);
+}
+.card li p:nth-of-type(1) {
+  color: hsl(211, 57%, 7%) !important;
+}
+.card li p:nth-of-type(2) {
+  color: hsla(212, 100%, 5%, 0.75) !important;
+}
+.card button {
+  font-size: 16px;
+}/*# sourceMappingURL=destinos.css.map */

@@ -1,0 +1,20 @@
+@import "../_globals/variables";
+
+#formulario {
+  width: 80% !important;
+  max-width: 780px;
+}
+
+label {
+  font-size: 16px;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+  font-size: 16px !important;
+}
+
+button {
+  font-size: 16px !important;
+}
