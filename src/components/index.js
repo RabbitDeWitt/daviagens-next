@@ -5,11 +5,14 @@ import DestinationCard from "./destinationCard/DestinationCard";
 import PromotionCard from "./promotionCard/PromotionCard";
 import Button from "./button/Button";
 
+import FormCliente from "./form/FormCliente";
+
 export {
   Navbar,
   Footer,
   Button,
   Carousel,
   DestinationCard,
-  PromotionCard
+  PromotionCard,
+  FormCliente
 }

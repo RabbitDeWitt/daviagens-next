@@ -2,25 +2,28 @@ import Head from 'next/head'
 import { Carousel, DestinationCard, PromotionCard } from '@/components'
 import { listaDestinos } from '@/constants/data'
 import { useEffect, useState } from 'react'
+import { useDestinos } from '@/hooks'
 
 export default function Home() {
+  const { destinos, listarDestinos } = useDestinos()
 
   const [carouselDestinos, setCarouselDestinos] = useState([])
-  const [destinos, setDestinos] = useState([])
+  const [teste, setTeste] = useState([])
   const [promocoes, setPromocoes] = useState([])
 
+  console.log(destinos)
 
   useEffect(() => {
     let numeros = []
     while (numeros.length < 7) {
-      let num = Math.floor(Math.random() * listaDestinos.length)
+      let num = Math.floor(Math.random() * 11)
       if (numeros.indexOf(num) === -1) numeros.push(num)
     }
-
-
     setCarouselDestinos(numeros.slice(0, 3))
-    setDestinos(numeros.slice(3, 5))
+    setTeste(numeros.slice(3, 5))
     setPromocoes(numeros.slice(5, 7))
+
+    listarDestinos()
   }, [])
 
   return (
@@ -49,11 +52,12 @@ export default function Home() {
           </div>
 
           <div className="card-section d-flex gap-3">
-            {destinos.map((destino, i) => (
+
+            {/* {destinos.map((destino, i) => (
               <DestinationCard
                 key={i}
-                destino={listaDestinos[destino]} />
-            ))}
+                destino={destinos[1]} />
+            ))} */}
           </div>
 
         </section>
@@ -71,11 +75,11 @@ export default function Home() {
           </div>
 
           <div className="card-section d-flex gap-3">
-            {promocoes.map((destino, i) => (
+            {/*  {promocoes.map((destino, i) => (
               <PromotionCard
                 key={i}
                 destino={listaDestinos[destino]} />
-            ))}
+            ))} */}
           </div>
         </section>
 

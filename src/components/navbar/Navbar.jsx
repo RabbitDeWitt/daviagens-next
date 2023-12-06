@@ -14,6 +14,7 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', scrollHandler);
   }, [top]);
 
+
   return (
     <header className='fixed-top'>
       <nav className={`navbar navbar-dark navbar-expand-lg ${!top ? 'scrolled' : ''}`} id="navbar">

@@ -8,9 +8,9 @@ const PromotionCard = ({ destino }) => {
   return (
     <div className="card" style={{ width: 286 }}>
       <Image
-        src={`/imgs/min/${img}_min.jpg`}
+        src={img}
         className="card-img-top"
-        alt="Imagem de ${nome}"
+        alt={`"Imagem de ${nome}"`}
         width={286}
         height={161}
       />

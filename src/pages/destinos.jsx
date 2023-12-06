@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Head from 'next/head'
 import { DestinationCard } from '@/components'
 import { useDestinos } from '@/hooks'
 
 const destinos = () => {
-  const { destinos, filtrarNacionais, filtrarInternacionais, mostrarTodos } = useDestinos()
+  const { destinos, listarDestinos, filtrarNacionais, filtrarInternacionais, mostrarTodos } = useDestinos()
+
+  useEffect(() => {
+    listarDestinos()
+  }, [])
+
+  console.log(destinos)
   return (
     <>
       <Head>

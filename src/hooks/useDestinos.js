@@ -1,10 +1,19 @@
-import { listaDestinos } from "@/constants/data"
-import { useState } from "react"
+import { useRouter } from "next/router"
+import { useEffect, useState } from "react"
+import axios from 'axios'
+//import { listaDestinos } from "@/constants/data"
 
 const useDestinos = () => {
-  const destinosOrdenados = listaDestinos.sort((a, b) => a.nome < b.nome ? -1 : 1)
+  const URL = 'http://localhost:8080/destinos'
+  const router = useRouter()
+  const [destinos, setDestinos] = useState([])
 
-  const [destinos, setDestinos] = useState(destinosOrdenados)
+
+  const listarDestinos = async () => {
+    axios.get(URL)
+      .then(res => setDestinos(res.data.sort((a, b) => a.nome < b.nome ? -1 : 1)))
+      .catch(err => console.log(err))
+  }
 
   const filtrarNacionais = () => {
     setDestinos(destinosOrdenados.filter(destino => destino.tipo === "NACIONAL"))
@@ -18,9 +27,9 @@ const useDestinos = () => {
     setDestinos(destinosOrdenados)
   }
 
-
   return {
     destinos,
+    listarDestinos,
     filtrarNacionais,
     filtrarInternacionais,
     mostrarTodos

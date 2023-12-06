@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Head from 'next/head'
 import { PromotionCard } from '@/components'
-import { usePromotions } from '@/hooks'
+import { useDestinos, usePromotions } from '@/hooks'
 
 const promocoes = () => {
-  const { destinos, listarMenorPreco, listarMaiorDesconto, listarMaiorPreco, listarMenorDesconto } = usePromotions()
+  // const { listarMenorPreco, listarMaiorDesconto, listarMaiorPreco, listarMenorDesconto } = usePromotions()
+  const { destinos, listarDestinos } = useDestinos()
+
+  useEffect(() => {
+    listarDestinos()
+  }, [])
   return (
     <>
       <Head>

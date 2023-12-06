@@ -5,16 +5,20 @@ export const navLinks = [
   },
   {
     label: "Destinos",
-    link: "destinos"
+    link: "/destinos"
   },
   {
     label: "Promoções",
-    link: "promocoes"
+    link: "/promocoes"
   },
   {
     label: "Contato",
-    link: "contato"
+    link: "/contato"
   },
+  {
+    label: "Cadastros",
+    link: "/cadastros/clientes"
+  }
 ]
 
 export const listaDestinos = [

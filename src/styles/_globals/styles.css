@@ -51,6 +51,15 @@ header nav .offcanvas .offcanvas-header .btn-close {
   filter: invert(1) brightness(200%) grayscale(100%);
 }
 
+.modal-content {
+  background-color: hsl(211, 21%, 15%);
+  color: #fff;
+}
+
+.btn-close {
+  color: #fff;
+}
+
 /* FOOTER */
 footer {
   margin-top: 40px !important;
