@@ -23,7 +23,7 @@ const destinos = () => {
       <main className="container">
         <div className="py-4">
           <h1>Lista de Destinos</h1>
-          <button className='btn btn-primary' data-bs-toggle="modal" data-bs-target="#destinoModal" onClick={() => setDestino({ id: 0, nome: '', valor: 0, descricao: '', descricaoCompleta: '', desconto: 0, img: '', tipo: '' })}>Cadastrar destino</button>
+          <button className='btn btn-primary' data-bs-toggle="modal" data-bs-target="#destinoModal" onClick={() => setDestino({ id: 0, nome: '', valor: 0, descricao: '', descricaoCompleta: '', desconto: 0, img: '', tipo: 'NACIONAL' })}>Cadastrar destino</button>
 
           <FormDestino />
 

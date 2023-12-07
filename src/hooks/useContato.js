@@ -9,11 +9,20 @@ const useContato = () => {
   const [contatos, setContatos] = useState([])
   const [contato, setContato] = useState({ id: 0, nome: '', email: '', mensagem: '' }) */
 
-  const { contato, setContatos } = useAppContext()
+  const { contato, setContatos, setValido } = useAppContext()
 
   /*  const handleInputChange = e => {
      setContato({ ...contato, [e.target.name]: e.target.value })
    } */
+
+  const validarContato = () => {
+    const { nome, email, mensagem } = contato
+    if (nome != '' && email != '' && mensagem != '') {
+      setValido(true)
+    } else {
+      setValido(false)
+    }
+  }
 
   const criarContato = async () => {
     axios.post(URL, contato)
@@ -55,7 +64,8 @@ const useContato = () => {
     // buscarContato,
     listarContato,
     atualizarContato,
-    deletarContato
+    deletarContato,
+    validarContato
   }
 }
 

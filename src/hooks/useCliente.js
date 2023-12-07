@@ -16,7 +16,7 @@ const useCliente = () => {
    } */
 
   const validarCliente = () => {
-    const { id, nome, telefone, dataNasc, numPassaporte } = cliente
+    const { nome, telefone, dataNasc, numPassaporte } = cliente
     if (nome != '' && telefone != '' && dataNasc != '' && numPassaporte != '') {
       setValido(true)
     } else {

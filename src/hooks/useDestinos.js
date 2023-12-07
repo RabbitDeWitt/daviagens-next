@@ -9,8 +9,16 @@ const useDestinos = () => {
   // const router = useRouter()
   // const [destinos, setDestinos] = useState([])
 
-  const { destino, setDestinos } = useAppContext()
+  const { destino, setDestinos, setValido } = useAppContext()
 
+  const validarDestino = () => {
+    const { nome, valor, descricao, descricaoCompleta, img, desconto } = destino
+    if (nome != '' && valor > 0 && descricao != '' && descricaoCompleta != '' && img != '' && desconto >= 0) {
+      setValido(true)
+    } else {
+      setValido(false)
+    }
+  }
 
   const listarDestinos = async () => {
     axios.get(URL)
@@ -60,7 +68,8 @@ const useDestinos = () => {
     deletarDestino,
     filtrarNacionais,
     filtrarInternacionais,
-    mostrarTodos
+    mostrarTodos,
+    validarDestino
   }
 }
 

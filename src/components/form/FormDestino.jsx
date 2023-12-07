@@ -1,13 +1,18 @@
 import { useAppContext } from '@/context/appContext'
 import { useDestinos } from '@/hooks'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const FormDestino = () => {
-  const { atualizarDestino, criarDestino } = useDestinos()
+  const { atualizarDestino, criarDestino, validarDestino } = useDestinos()
 
-  const { destino, handleDestinoInputChange } = useAppContext()
+  const { destino, handleDestinoInputChange, valido } = useAppContext()
 
   const { id, nome, valor, descricao, descricaoCompleta, img, desconto, tipo } = destino
+
+  useEffect(() => {
+    validarDestino()
+  }, [destino])
+
   return (
     <div className="modal fade dark" id="destinoModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div className="modal-dialog">
@@ -56,7 +61,7 @@ const FormDestino = () => {
               <div className="d-flex gap-2 justify-content-end mb-3">
                 <a type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</a>
                 <a
-                  className="btn btn-primary"
+                  className={`btn btn-primary ${valido == false ? 'disabled' : ''}`}
                   data-bs-dismiss="modal"
                   onClick={() => id == 0 ? criarDestino() : atualizarDestino(id)}>
                   {id == 0 ? 'Cadastrar' : 'Atualizar'}

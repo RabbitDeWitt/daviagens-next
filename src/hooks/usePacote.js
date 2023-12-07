@@ -13,7 +13,16 @@ const usePacote = () => {
     setNovoPacote({ ...novoPacote, [e.target.name]: e.target.value })
   } */
 
-  const { pacote, setPacotes } = useAppContext()
+  const { pacote, setPacotes, setValido } = useAppContext()
+
+  const validarPacote = () => {
+    const { nome, valor } = pacote
+    if (nome != '' && valor >= 0) {
+      setValido(true)
+    } else {
+      setValido(false)
+    }
+  }
 
   const criarPacote = async () => {
     axios.post(URL, pacote)
@@ -55,7 +64,8 @@ const usePacote = () => {
     //buscarPacote,
     listarPacote,
     atualizarPacote,
-    deletarPacote
+    deletarPacote,
+    validarPacote
   }
 }
 

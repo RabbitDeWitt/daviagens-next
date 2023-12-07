@@ -1,13 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useAppContext } from '@/context/appContext'
 import { usePacote } from '@/hooks'
 
 const FormPacote = () => {
-  const { atualizarPacote, criarPacote } = usePacote()
+  const { atualizarPacote, criarPacote, validarPacote } = usePacote()
 
-  const { pacote, handlePacoteInputChange } = useAppContext()
+  const { pacote, handlePacoteInputChange, valido } = useAppContext()
 
   const { id, nome, valor } = pacote
+
+  useEffect(() => {
+    validarPacote()
+  }, [pacote])
+
   return (
     <div className="modal fade dark" id="pacoteModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div className="modal-dialog">
@@ -36,7 +41,7 @@ const FormPacote = () => {
               <div className="d-flex gap-2 justify-content-end mb-3">
                 <a type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</a>
                 <a
-                  className="btn btn-primary"
+                  className={`btn btn-primary ${valido == false ? 'disabled' : ''}`}
                   data-bs-dismiss="modal"
                   onClick={() => id == 0 ? criarPacote() : atualizarPacote(id)}>
                   {id == 0 ? 'Cadastrar' : 'Atualizar'}

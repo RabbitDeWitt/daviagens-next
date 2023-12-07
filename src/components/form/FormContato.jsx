@@ -1,13 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useAppContext } from '@/context/appContext'
 import { useContato } from '@/hooks'
 
 const FormContato = () => {
-  const { atualizarContato, criarContato } = useContato()
+  const { atualizarContato, criarContato, validarContato } = useContato()
 
-  const { contato, handleContatoInputChange } = useAppContext()
+  const { contato, handleContatoInputChange, valido } = useAppContext()
 
   const { id, nome, email, mensagem } = contato
+
+  useEffect(() => {
+    validarContato()
+  }, [contato])
   return (
     <div className="modal fade dark" id="contatoModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div className="modal-dialog">
@@ -40,7 +44,7 @@ const FormContato = () => {
               <div className="d-flex gap-2 justify-content-end mb-3">
                 <a type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</a>
                 <a
-                  className="btn btn-primary"
+                  className={`btn btn-primary ${valido == false ? 'disabled' : ''}`}
                   data-bs-dismiss="modal"
                   onClick={() => id == 0 ? criarContato() : atualizarContato(id)}>
                   {id == 0 ? 'Cadastrar' : 'Atualizar'}
