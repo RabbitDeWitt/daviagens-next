@@ -7,13 +7,22 @@ const useCliente = () => {
   const URL = 'http://localhost:8080/clientes'
   //const router = useRouter()
   //const [clientes, setClientes] = useState([])
-  const { cliente, setClientes } = useAppContext()
+  const { cliente, setClientes, setValido } = useAppContext()
 
   /*  const [cliente, setCliente] = useState({ id: 0, nome: '', dataNasc: '', telefone: '', numPassaporte: '' })
  
    const handleInputChange = e => {
      setCliente({ ...cliente, [e.target.name]: e.target.value })
    } */
+
+  const validarCliente = () => {
+    const { id, nome, telefone, dataNasc, numPassaporte } = cliente
+    if (nome != '' && telefone != '' && dataNasc != '' && numPassaporte != '') {
+      setValido(true)
+    } else {
+      setValido(false)
+    }
+  }
 
 
   const listarCliente = async () => {
@@ -57,7 +66,8 @@ const useCliente = () => {
     // buscarCliente,
     listarCliente,
     atualizarCliente,
-    deletarCliente
+    deletarCliente,
+    validarCliente
   }
 }
 

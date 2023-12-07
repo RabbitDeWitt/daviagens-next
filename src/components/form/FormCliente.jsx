@@ -1,14 +1,19 @@
 import { useAppContext } from '@/context/appContext'
 import { useCliente } from '@/hooks'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 const FormCliente = () => {
-  const { atualizarCliente, criarCliente } = useCliente()
+  const { atualizarCliente, criarCliente, validarCliente } = useCliente()
 
-  const { cliente, handleClienteInputChange } = useAppContext()
+  const { cliente, handleClienteInputChange, valido } = useAppContext()
 
   const { id, nome, telefone, dataNasc, numPassaporte } = cliente
 
+  //const [valido, setValido] = useState(false)
+
+  useEffect(() => {
+    validarCliente()
+  }, [cliente])
 
   return (
     <div className="modal fade dark" id="clienteModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -46,9 +51,10 @@ const FormCliente = () => {
               <div className="d-flex gap-2 justify-content-end mb-3">
                 <a type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</a>
                 <a
-                  className="btn btn-primary"
+                  className={`btn btn-primary ${valido == false ? 'disabled' : ''}`}
                   data-bs-dismiss="modal"
-                  onClick={() => id == 0 ? criarCliente() : atualizarCliente(id)}>
+                  onClick={() => id == 0 ? criarCliente() : atualizarCliente(id)}
+                >
                   {id == 0 ? 'Cadastrar' : 'Atualizar'}
                 </a>
               </div>

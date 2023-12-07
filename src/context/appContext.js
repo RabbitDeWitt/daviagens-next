@@ -3,6 +3,8 @@ import React, { createContext, useContext, useState } from 'react'
 const AppContext = createContext()
 
 export const AppProvider = ({ children }) => {
+  const [valido, setValido] = useState(false)
+
   const [cliente, setCliente] = useState({ id: 0, nome: '', dataNasc: '', telefone: '', numPassaporte: '' })
   const [clientes, setClientes] = useState([])
 
@@ -33,6 +35,8 @@ export const AppProvider = ({ children }) => {
 
   return (
     <AppContext.Provider value={{
+      valido,
+      setValido,
       cliente,
       setCliente,
       clientes,
