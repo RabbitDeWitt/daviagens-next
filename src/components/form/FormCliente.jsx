@@ -9,8 +9,6 @@ const FormCliente = () => {
 
   const { id, nome, telefone, dataNasc, numPassaporte } = cliente
 
-  //const [valido, setValido] = useState(false)
-
   useEffect(() => {
     validarCliente()
   }, [cliente])

@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { FormCliente } from '@/components'
 import { useAppContext } from '@/context/appContext'
 import { useCliente } from '@/hooks'
+import moment from 'moment'
 
 const clientes = () => {
   const { listarCliente, deletarCliente } = useCliente()
@@ -47,7 +48,7 @@ const clientes = () => {
                     <th>{cliente.id}</th>
                     <td>{cliente.nome}</td>
                     <td>{cliente.telefone}</td>
-                    <td>{new Date(cliente.dataNasc).toLocaleDateString()}</td>
+                    <td>{moment(cliente.dataNasc).format('DD/MM/yyyy')}</td>
                     <td>{cliente.numPassaporte}</td>
                     <td>
                       <button className="btn btn-warning" data-bs-toggle="modal" data-bs-target="#clienteModal" onClick={() => setCliente(cliente)}>Editar</button>
