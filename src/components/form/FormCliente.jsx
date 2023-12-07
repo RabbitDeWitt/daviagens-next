@@ -1,11 +1,11 @@
-import { useClienteContext } from '@/context/clienteContext'
+import { useAppContext } from '@/context/appContext'
 import { useCliente } from '@/hooks'
 import React from 'react'
 
 const FormCliente = () => {
   const { atualizarCliente, criarCliente } = useCliente()
 
-  const { cliente, handleInputChange } = useClienteContext()
+  const { cliente, handleClienteInputChange } = useAppContext()
 
   const { id, nome, telefone, dataNasc, numPassaporte } = cliente
 
@@ -29,19 +29,19 @@ const FormCliente = () => {
               </div>
               <div className="mb-3">
                 <label htmlFor="nome" className="form-label">Nome:</label>
-                <input type="text" id="nome" name="nome" className="form-control" onChange={handleInputChange} value={nome} required />
+                <input type="text" id="nome" name="nome" className="form-control" onChange={handleClienteInputChange} value={nome} required />
               </div>
               <div className="mb-3">
                 <label htmlFor="data" className="form-label">Data de nascimento:</label>
-                <input type="date" id="data" name="dataNasc" className="form-control" onChange={handleInputChange} value={dataNasc} required />
+                <input type="date" id="data" name="dataNasc" className="form-control" onChange={handleClienteInputChange} value={dataNasc} required />
               </div>
               <div className="mb-3">
                 <label htmlFor="telefone" className="form-label">Telefone:</label>
-                <input type="text" id="telefone" name="telefone" className="form-control" onChange={handleInputChange} value={telefone} required />
+                <input type="text" id="telefone" name="telefone" className="form-control" onChange={handleClienteInputChange} value={telefone} required />
               </div>
               <div className="mb-3">
                 <label htmlFor="numPassaporte" className="form-label">Número do passaporte:</label>
-                <input type="text" id="numPassaporte" name="numPassaporte" className="form-control" onChange={handleInputChange} value={numPassaporte} required />
+                <input type="text" id="numPassaporte" name="numPassaporte" className="form-control" onChange={handleClienteInputChange} value={numPassaporte} required />
               </div>
               <div className="d-flex gap-2 justify-content-end mb-3">
                 <a type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</a>

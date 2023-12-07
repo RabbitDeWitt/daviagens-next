@@ -1,13 +1,13 @@
 //import { useRouter } from "next/router"
 import { useState } from "react"
 import axios from 'axios'
-import { useClienteContext } from "@/context/clienteContext"
+import { useAppContext } from "@/context/appContext"
 
 const useCliente = () => {
   const URL = 'http://localhost:8080/clientes'
   //const router = useRouter()
   //const [clientes, setClientes] = useState([])
-  const { cliente, setClientes } = useClienteContext()
+  const { cliente, setClientes } = useAppContext()
 
   /*  const [cliente, setCliente] = useState({ id: 0, nome: '', dataNasc: '', telefone: '', numPassaporte: '' })
  
@@ -37,7 +37,7 @@ const useCliente = () => {
 
   const atualizarCliente = async (id) => {
     axios.put(`${URL}/${id}`, cliente)
-      .then(() => console.log(id))
+      .then(() => console.log("Cadastro atualizado!!!"))
       .catch(err => console.log(err))
       .finally(() => listarCliente())
   }

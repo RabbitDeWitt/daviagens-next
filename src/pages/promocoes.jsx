@@ -2,10 +2,12 @@ import React, { useEffect } from 'react'
 import Head from 'next/head'
 import { PromotionCard } from '@/components'
 import { useDestinos, usePromotions } from '@/hooks'
+import { useAppContext } from '@/context/appContext'
 
 const promocoes = () => {
   // const { listarMenorPreco, listarMaiorDesconto, listarMaiorPreco, listarMenorDesconto } = usePromotions()
-  const { destinos, listarDestinos } = useDestinos()
+  const { listarDestinos } = useDestinos()
+  const { destinos } = useAppContext()
 
   useEffect(() => {
     listarDestinos()

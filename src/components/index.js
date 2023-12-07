@@ -6,6 +6,9 @@ import PromotionCard from "./promotionCard/PromotionCard";
 import Button from "./button/Button";
 
 import FormCliente from "./form/FormCliente";
+import FormContato from "./form/FormContato";
+import FormPacote from "./form/FormPacote";
+import FormDestino from "./form/FormDestino";
 
 export {
   Navbar,
@@ -14,5 +17,8 @@ export {
   Carousel,
   DestinationCard,
   PromotionCard,
-  FormCliente
+  FormCliente,
+  FormContato,
+  FormPacote,
+  FormDestino
 }

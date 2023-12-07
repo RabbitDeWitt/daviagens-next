@@ -2,9 +2,11 @@ import React, { useEffect } from 'react'
 import Head from 'next/head'
 import { DestinationCard } from '@/components'
 import { useDestinos } from '@/hooks'
+import { useAppContext } from '@/context/appContext'
 
 const destinos = () => {
-  const { destinos, listarDestinos, filtrarNacionais, filtrarInternacionais, mostrarTodos } = useDestinos()
+  const { listarDestinos, filtrarNacionais, filtrarInternacionais, mostrarTodos } = useDestinos()
+  const { destinos } = useAppContext()
 
   useEffect(() => {
     listarDestinos()

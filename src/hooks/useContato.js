@@ -1,21 +1,25 @@
-import { useRouter } from "next/router"
-import { useState } from "react"
+// import { useRouter } from "next/router"
+// import { useState } from "react"
+import { useAppContext } from '@/context/appContext'
 import axios from 'axios'
 
 const useContato = () => {
   const URL = 'http://localhost:8080/contatos'
-  const router = useRouter()
+  /* const router = useRouter()
   const [contatos, setContatos] = useState([])
-  const [novoContato, setNovoContato] = useState({ id: 0, nome: '', email: '', mensagem: '' })
+  const [contato, setContato] = useState({ id: 0, nome: '', email: '', mensagem: '' }) */
 
-  const handleInputChange = e => {
-    setNovoContato({ ...novoCliente, [e.target.name]: e.target.value })
-  }
+  const { contato, setContatos } = useAppContext()
+
+  /*  const handleInputChange = e => {
+     setContato({ ...contato, [e.target.name]: e.target.value })
+   } */
 
   const criarContato = async () => {
-    axios.post(URL, novoContato)
-      .then(() => router.push('/contatos'))
+    axios.post(URL, contato)
+      .then(() => console.log("Cadastro realizado!!!"))
       .catch(err => console.log(err))
+      .finally(() => listarContato())
   }
 
   const listarContato = async () => {
@@ -24,16 +28,17 @@ const useContato = () => {
       .catch(err => console.log(err))
   }
 
-  const buscarContato = async (id) => {
-    axios.get(`${URL}/${id}`)
-      .then(res => setNovoContato(res.data))
-      .catch(err => console.log(err))
-  }
+  /*  const buscarContato = async (id) => {
+     axios.get(`${URL}/${id}`)
+       .then(res => setContato(res.data))
+       .catch(err => console.log(err))
+   } */
 
   const atualizarContato = async (id) => {
-    axios.put(`${URL}/${id}`, novoContato)
-      .then(() => router.push('/contatos'))
+    axios.put(`${URL}/${id}`, contato)
+      .then(() => console.log("Cadastro atualizado!!!"))
       .catch(err => console.log(err))
+      .finally(() => listarContato())
   }
 
   const deletarContato = async (id) => {
@@ -43,11 +48,11 @@ const useContato = () => {
   }
 
   return {
-    contatos,
-    novoContato,
-    handleInputChange,
+    // contatos,
+    // contato,
+    // handleInputChange,
     criarContato,
-    buscarContato,
+    // buscarContato,
     listarContato,
     atualizarContato,
     deletarContato

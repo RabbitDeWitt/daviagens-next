@@ -7,17 +7,17 @@ import '@/styles/destinos/destinos.css'
 import '@/styles/promocoes/promocoes.css'
 import '@/styles/contato/contato.css'
 import '@/styles/index/index.css'
-import { ClienteProvider } from '@/context/clienteContext'
+import { AppProvider } from '@/context/appContext'
 
 
 export default function App({ Component, pageProps }) {
   return (
-    <ClienteProvider>
+    <AppProvider>
       <div className='min-vh-100 d-flex flex-column justify-content-between'>
         <Navbar />
         <Component {...pageProps} />
         <Footer />
       </div>
-    </ClienteProvider>
+    </AppProvider>
   )
 }

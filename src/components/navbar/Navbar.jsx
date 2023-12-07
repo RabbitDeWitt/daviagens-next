@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { navLinks } from '@/constants/data';
+import { useRouter } from 'next/router';
 
 const Navbar = () => {
+  const router = useRouter()
+
   const [top, setTop] = useState(true);
 
   useEffect(() => {
@@ -13,7 +16,6 @@ const Navbar = () => {
     window.addEventListener('scroll', scrollHandler);
     return () => window.removeEventListener('scroll', scrollHandler);
   }, [top]);
-
 
   return (
     <header className='fixed-top'>
@@ -39,7 +41,7 @@ const Navbar = () => {
                   <Link
                     key={i}
                     href={link}
-                    className='nav-link'
+                    className={`nav-link ${link === router.pathname ? 'active' : ''}`}
                   >
                     {label}
                   </Link>

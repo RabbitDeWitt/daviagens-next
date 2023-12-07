@@ -1,12 +1,12 @@
-import { FormCliente } from '@/components'
-import { useClienteContext } from '@/context/clienteContext'
-import { useCliente } from '@/hooks'
-import Head from 'next/head'
 import React, { useEffect } from 'react'
+import Head from 'next/head'
+import { FormCliente } from '@/components'
+import { useAppContext } from '@/context/appContext'
+import { useCliente } from '@/hooks'
 
 const clientes = () => {
   const { listarCliente, deletarCliente } = useCliente()
-  const { clientes, setCliente } = useClienteContext()
+  const { clientes, setCliente } = useAppContext()
 
   useEffect(() => {
     listarCliente()

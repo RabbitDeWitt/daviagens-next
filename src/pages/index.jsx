@@ -1,17 +1,23 @@
 import Head from 'next/head'
 import { Carousel, DestinationCard, PromotionCard } from '@/components'
-import { listaDestinos } from '@/constants/data'
+// import { listaDestinos } from '@/constants/data'
 import { useEffect, useState } from 'react'
 import { useDestinos } from '@/hooks'
+import { useAppContext } from '@/context/appContext'
 
 export default function Home() {
-  const { destinos, listarDestinos } = useDestinos()
+  const { listarDestinos } = useDestinos()
+
+  const { destinos } = useAppContext()
 
   const [carouselDestinos, setCarouselDestinos] = useState([])
-  const [teste, setTeste] = useState([])
-  const [promocoes, setPromocoes] = useState([])
 
-  console.log(destinos)
+  useEffect(() => {
+    listarDestinos()
+  }, [])
+
+  const [promocoes, setPromocoes] = useState([])
+  const [teste, setTeste] = useState([])
 
   useEffect(() => {
     let numeros = []
@@ -23,8 +29,12 @@ export default function Home() {
     setTeste(numeros.slice(3, 5))
     setPromocoes(numeros.slice(5, 7))
 
-    listarDestinos()
-  }, [])
+    console.log(numeros)
+
+    console.log(destinos)
+  }, [destinos])
+
+
 
   return (
     <>
@@ -53,10 +63,10 @@ export default function Home() {
 
           <div className="card-section d-flex gap-3">
 
-            {/* {destinos.map((destino, i) => (
+
+            {/* {destinos.map((num, i) => (
               <DestinationCard
-                key={i}
-                destino={destinos[1]} />
+                destino={destinos[0]} />
             ))} */}
           </div>
 
@@ -75,10 +85,10 @@ export default function Home() {
           </div>
 
           <div className="card-section d-flex gap-3">
-            {/*  {promocoes.map((destino, i) => (
+            {/* {promocoes.map((num, i) => (
               <PromotionCard
                 key={i}
-                destino={listaDestinos[destino]} />
+                destino={destinos[num]} />
             ))} */}
           </div>
         </section>
