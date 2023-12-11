@@ -17,7 +17,7 @@ const reservas = () => {
       <main className="container">
         <div className="py-4">
           <h1>Lista de Reservas</h1>
-          <button className='btn btn-primary' data-bs-toggle="modal" data-bs-target="#clienteModal" onClick={() => setCliente({ id: 0, cliente: { id: 1 }, destino: { id: 1 }, pacote: { id: 1 }, valor: 0 })}>Cadastrar contato</button>
+          <button className='btn btn-primary' data-bs-toggle="modal" data-bs-target="#resesvaModal" onClick={() => setReserva({ id: 0, cliente: { id: 1 }, destino: { id: 1 }, pacote: { id: 1 }, valor: 0 })}>Cadastrar reserva</button>
         </div>
       </main>
     </>

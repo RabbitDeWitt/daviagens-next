@@ -1,13 +1,10 @@
-import { listaDestinos } from '@/constants/data'
 import React from 'react'
 
 const Carousel = ({ carouselDestinos }) => {
 
-  const nums = [...carouselDestinos]
-  let destinos = []
-  nums.map(num => {
-    destinos.push(listaDestinos[num])
-  })
+  let destinos = [...carouselDestinos]
+
+  console.log(destinos)
 
   return (
     <div id="carouselExampleFade" className="carousel slide carousel-fade" data-bs-ride="carousel">
@@ -29,7 +26,7 @@ const Carousel = ({ carouselDestinos }) => {
 
         {destinos.map(({ img, nome, descricao }, i) => (
           <div key={i} className={`carousel-item ${i === 0 ? 'active' : ''}`} data-bs-interval="5000">
-            <img src={`/imgs/${img}.jpg`} className="d-block w-100" alt={`Imagem de ${nome}`} />
+            <img src={img} className="d-block w-100" alt={`Imagem de ${nome}`} />
             <div className="carousel-caption px-2 d-none d-md-block">
               <h4>{nome}</h4>
               <p>{descricao}</p>

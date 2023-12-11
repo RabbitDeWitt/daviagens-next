@@ -11,28 +11,29 @@ export default function Home() {
   const { destinos } = useAppContext()
 
   const [carouselDestinos, setCarouselDestinos] = useState([])
+  const [promocoes, setPromocoes] = useState([])
+  const [teste, setTeste] = useState([])
 
   useEffect(() => {
     listarDestinos()
   }, [])
 
-  const [promocoes, setPromocoes] = useState([])
-  const [teste, setTeste] = useState([])
 
   useEffect(() => {
+    const tamArray = destinos.length || 11
+
     let numeros = []
     while (numeros.length < 7) {
-      let num = Math.floor(Math.random() * 11)
+      let num = Math.ceil(Math.random() * tamArray)
       if (numeros.indexOf(num) === -1) numeros.push(num)
     }
-    setCarouselDestinos(numeros.slice(0, 3))
-    setTeste(numeros.slice(3, 5))
-    setPromocoes(numeros.slice(5, 7))
 
-    console.log(numeros)
+    setCarouselDestinos(destinos.filter((destino) => destino.id === numeros[0] || destino.id === numeros[1] || destino.id === numeros[2]))
+    setTeste(destinos.filter((destino) => destino.id === numeros[3] || destino.id === numeros[4]))
+    setPromocoes(destinos.filter((destino) => destino.id === numeros[5] || destino.id === numeros[6]))
 
-    console.log(destinos)
   }, [destinos])
+
 
 
 
@@ -64,10 +65,11 @@ export default function Home() {
           <div className="card-section d-flex gap-3">
 
 
-            {/* {destinos.map((num, i) => (
+            {teste.map((destino, i) => (
               <DestinationCard
-                destino={destinos[0]} />
-            ))} */}
+                key={i}
+                destino={destino} />
+            ))}
           </div>
 
         </section>
@@ -85,11 +87,11 @@ export default function Home() {
           </div>
 
           <div className="card-section d-flex gap-3">
-            {/* {promocoes.map((num, i) => (
+            {promocoes.map((promocao, i) => (
               <PromotionCard
                 key={i}
-                destino={destinos[num]} />
-            ))} */}
+                destino={promocao} />
+            ))}
           </div>
         </section>
 
