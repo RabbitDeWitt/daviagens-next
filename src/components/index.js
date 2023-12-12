@@ -9,6 +9,7 @@ import FormCliente from "./form/FormCliente";
 import FormContato from "./form/FormContato";
 import FormPacote from "./form/FormPacote";
 import FormDestino from "./form/FormDestino";
+import FormReserva from "./form/FormReserva";
 
 export {
   Navbar,
@@ -20,5 +21,6 @@ export {
   FormCliente,
   FormContato,
   FormPacote,
-  FormDestino
+  FormDestino,
+  FormReserva
 }

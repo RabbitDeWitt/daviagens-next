@@ -13,7 +13,7 @@ const usePacote = () => {
     setNovoPacote({ ...novoPacote, [e.target.name]: e.target.value })
   } */
 
-  const { pacote, setPacotes, setValido } = useAppContext()
+  const { pacote, setPacote, setPacotes, setValido } = useAppContext()
 
   const validarPacote = () => {
     const { nome, valor } = pacote
@@ -37,11 +37,11 @@ const usePacote = () => {
       .catch(err => console.log(err))
   }
 
-  /*   const buscarPacote = async (id) => {
-      axios.get(`${URL}/${id}`)
-        .then(res => setNovoPacote(res.data))
-        .catch(err => console.log(err))
-    } */
+  /* const buscarPacote = async (id) => {
+    axios.get(`${URL}/${id}`)
+      .then(res => setPacote(res.data))
+      .catch(err => console.log(err))
+  } */
 
   const atualizarPacote = async (id) => {
     axios.put(`${URL}/${id}`, pacote)

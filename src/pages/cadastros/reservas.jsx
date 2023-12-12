@@ -1,10 +1,26 @@
 import React, { useEffect } from 'react'
 import Head from 'next/head'
-import { FormCliente } from '@/components'
+import { FormReserva } from '@/components'
 import { useAppContext } from '@/context/appContext'
-import { useReserva } from '@/hooks'
+import { useCliente, useDestinos, usePacote, useReserva } from '@/hooks'
+import moment from 'moment'
 
 const reservas = () => {
+
+  const { listarReserva, deletarReserva } = useReserva()
+  const { listarDestinos } = useDestinos()
+  const { listarPacote } = usePacote()
+  const { listarCliente } = useCliente()
+  const { reservas, setReserva, clientes, destinos, pacotes } = useAppContext()
+
+
+
+  useEffect(() => {
+    listarReserva()
+    listarCliente()
+    listarDestinos()
+    listarPacote()
+  }, [])
   return (
     <>
       <Head>
@@ -17,7 +33,44 @@ const reservas = () => {
       <main className="container">
         <div className="py-4">
           <h1>Lista de Reservas</h1>
-          <button className='btn btn-primary' data-bs-toggle="modal" data-bs-target="#resesvaModal" onClick={() => setReserva({ id: 0, cliente: { id: 1 }, destino: { id: 1 }, pacote: { id: 1 }, valor: 0 })}>Cadastrar reserva</button>
+          <button className='btn btn-primary' data-bs-toggle="modal" data-bs-target="#reservaModal" onClick={() => setReserva({ id: 0, cliente: { ...clientes[0] }, destino: { ...destinos[0] }, pacote: { ...pacotes[0] }, dataPartida: '', dataRetorno: '', valor: 0 })}>Cadastrar reserva</button>
+
+          <FormReserva />
+
+          <div className="table-responsive mt-3 ">
+            <table className='table table-hover table-primary table-striped '>
+              <thead className='table-dark '>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Cliente</th>
+                  <th scope="col">Destino</th>
+                  <th scope="col">Pacote</th>
+                  <th scope="col">Data de partida</th>
+                  <th scope="col">Data de retorno</th>
+                  <th scope="col">Total</th>
+                  <th scope="col">Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                {reservas.map((reserva, i) => (
+                  <tr key={i}>
+                    <th>{reserva.id}</th>
+                    <td>{reserva.cliente.nome}</td>
+                    <td>{reserva.destino.nome}</td>
+                    <td>{reserva.pacote.nome}</td>
+                    <td>{moment(reserva.dataPartida).format('DD/MM/yyyy')}</td>
+                    <td>{moment(reserva.dataRetorno).format('DD/MM/yyyy')}</td>
+                    <td>R$ {(reserva.valor).toFixed(2)}</td>
+                    <td>
+                      <button className="btn btn-warning" data-bs-toggle="modal" data-bs-target="#reservaModal" onClick={() => setReserva(reserva)}>Editar</button>
+                      <button className="btn btn-danger" onClick={() => deletarReserva(reserva.id)}>Excluir</button>
+                    </td>
+                  </tr>
+                ))}
+
+              </tbody>
+            </table>
+          </div>
         </div>
       </main>
     </>

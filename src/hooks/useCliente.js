@@ -9,6 +9,7 @@ const useCliente = () => {
   //const [clientes, setClientes] = useState([])
   const { cliente, setClientes, setValido } = useAppContext()
 
+
   /*  const [cliente, setCliente] = useState({ id: 0, nome: '', dataNasc: '', telefone: '', numPassaporte: '' })
  
    const handleInputChange = e => {

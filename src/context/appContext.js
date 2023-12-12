@@ -1,8 +1,13 @@
-import React, { createContext, useContext, useState } from 'react'
+import { usePacote } from '@/hooks'
+import React, { createContext, useContext, useEffect, useState } from 'react'
+import axios from 'axios'
 
 const AppContext = createContext()
 
 export const AppProvider = ({ children }) => {
+
+
+
   const [valido, setValido] = useState(false)
 
   const [cliente, setCliente] = useState({ id: 0, nome: '', dataNasc: '', telefone: '', numPassaporte: '' })
@@ -16,6 +21,9 @@ export const AppProvider = ({ children }) => {
 
   const [destinos, setDestinos] = useState([])
   const [destino, setDestino] = useState({ id: 0, nome: '', valor: 0, descricao: '', descricaoCompleta: '', desconto: 0, img: '', tipo: '' })
+
+  const [reservas, setReservas] = useState([])
+  const [reserva, setReserva] = useState({ id: 0, cliente, destino, pacote, dataPartida: '', dataRetorno: '', valor: 0 })
 
   const handleClienteInputChange = e => {
     setCliente({ ...cliente, [e.target.name]: e.target.value })
@@ -31,6 +39,51 @@ export const AppProvider = ({ children }) => {
 
   const handleDestinoInputChange = e => {
     setDestino({ ...destino, [e.target.name]: e.target.value })
+  }
+
+  const handleReservaInputChange = e => {
+    setReserva({ ...reserva, [e.target.name]: e.target.value })
+  }
+
+  const handleReservaClienteInputChange = e => {
+    buscarCliente(Number.parseInt(e.target.value))
+  }
+
+  const handleReservaDestinoInputChange = e => {
+    buscarDestino(Number.parseInt(e.target.value))
+  }
+
+  const handleReservaPacoteInputChange = e => {
+    buscarPacote(Number.parseInt(e.target.value))
+  }
+
+  useEffect(() => {
+    reserva.cliente = cliente
+  }, [cliente])
+
+  useEffect(() => {
+    reserva.destino = destino
+    reserva.pacote = pacote
+    reserva.valor = destino.valor + pacote.valor
+    console.log(reserva)
+  }, [pacote, destino])
+
+  const buscarCliente = async (id) => {
+    axios.get(`http://localhost:8080/clientes/${id}`)
+      .then(res => setCliente(res.data))
+      .catch(err => console.log(err))
+  }
+
+  const buscarPacote = async (id) => {
+    axios.get(`http://localhost:8080/pacotes/${id}`)
+      .then(res => setPacote(res.data))
+      .catch(err => console.log(err))
+  }
+
+  const buscarDestino = async (id) => {
+    axios.get(`http://localhost:8080/destinos/${id}`)
+      .then(res => setDestino(res.data))
+      .catch(err => console.log(err))
   }
 
   return (
@@ -51,12 +104,21 @@ export const AppProvider = ({ children }) => {
       setPacote,
       pacotes,
       setPacotes,
+      buscarPacote,
       handlePacoteInputChange,
       destino,
       setDestino,
       destinos,
       setDestinos,
-      handleDestinoInputChange
+      handleDestinoInputChange,
+      reservas,
+      setReservas,
+      reserva,
+      setReserva,
+      handleReservaInputChange,
+      handleReservaClienteInputChange,
+      handleReservaDestinoInputChange,
+      handleReservaPacoteInputChange
     }}>
       {children}
     </AppContext.Provider>
