@@ -22,8 +22,9 @@ export const AppProvider = ({ children }) => {
   const [destinos, setDestinos] = useState([])
   const [destino, setDestino] = useState({ id: 0, nome: '', valor: 0, descricao: '', descricaoCompleta: '', desconto: 0, img: '', tipo: '' })
 
+
   const [reservas, setReservas] = useState([])
-  const [reserva, setReserva] = useState({ id: 0, cliente, destino, pacote, dataPartida: '', dataRetorno: '', valor: 0 })
+  const [reserva, setReserva] = useState({ id: 0, cliente: { ...clientes[0] }, destino: { ...destinos[0] }, pacote: { ...pacotes[0] }, dataPartida: '', dataRetorno: '', valor: 0 })
 
   const handleClienteInputChange = e => {
     setCliente({ ...cliente, [e.target.name]: e.target.value })
@@ -57,15 +58,17 @@ export const AppProvider = ({ children }) => {
     buscarPacote(Number.parseInt(e.target.value))
   }
 
+
+
   useEffect(() => {
     reserva.cliente = cliente
   }, [cliente])
 
   useEffect(() => {
-    reserva.destino = destino
-    reserva.pacote = pacote
-    reserva.valor = destino.valor + pacote.valor
-    console.log(reserva)
+    reserva.destino = destino.id === 0 ? { ...destinos[0] } : destino
+    reserva.pacote = pacote.id === 0 ? { ...pacotes[0] } : pacote
+    reserva.valor = reserva.destino.valor + reserva.pacote.valor
+    console.log("context: " + reserva.valor)
   }, [pacote, destino])
 
   const buscarCliente = async (id) => {
@@ -118,7 +121,7 @@ export const AppProvider = ({ children }) => {
       handleReservaInputChange,
       handleReservaClienteInputChange,
       handleReservaDestinoInputChange,
-      handleReservaPacoteInputChange
+      handleReservaPacoteInputChange,
     }}>
       {children}
     </AppContext.Provider>

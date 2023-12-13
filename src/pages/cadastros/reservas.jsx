@@ -20,7 +20,12 @@ const reservas = () => {
     listarCliente()
     listarDestinos()
     listarPacote()
+
+
   }, [])
+
+  console.log(reservas[7])
+
   return (
     <>
       <Head>
@@ -33,7 +38,16 @@ const reservas = () => {
       <main className="container">
         <div className="py-4">
           <h1>Lista de Reservas</h1>
-          <button className='btn btn-primary' data-bs-toggle="modal" data-bs-target="#reservaModal" onClick={() => setReserva({ id: 0, cliente: { ...clientes[0] }, destino: { ...destinos[0] }, pacote: { ...pacotes[0] }, dataPartida: '', dataRetorno: '', valor: 0 })}>Cadastrar reserva</button>
+          <button className='btn btn-primary' data-bs-toggle="modal" data-bs-target="#reservaModal"
+            onClick={() => setReserva({
+              id: 0,
+              cliente: { ...clientes[0] },
+              destino: { ...destinos[0] },
+              pacote: { ...pacotes[0] },
+              dataPartida: '',
+              dataRetorno: '',
+              valor: { ...destinos[0] }.valor + { ...pacotes[0] }.valor
+            })}>Cadastrar reserva</button>
 
           <FormReserva />
 
@@ -55,14 +69,14 @@ const reservas = () => {
                 {reservas.map((reserva, i) => (
                   <tr key={i}>
                     <th>{reserva.id}</th>
+                    <td>{moment(reserva.dataPartida).format('DD/MM/yyyy')}</td>
+                    <td>{moment(reserva.dataRetorno).format('DD/MM/yyyy')}</td>
                     <td>{reserva.cliente.nome}</td>
                     <td>{reserva.destino.nome}</td>
                     <td>{reserva.pacote.nome}</td>
-                    <td>{moment(reserva.dataPartida).format('DD/MM/yyyy')}</td>
-                    <td>{moment(reserva.dataRetorno).format('DD/MM/yyyy')}</td>
                     <td>R$ {(reserva.valor).toFixed(2)}</td>
                     <td>
-                      <button className="btn btn-warning" data-bs-toggle="modal" data-bs-target="#reservaModal" onClick={() => setReserva(reserva)}>Editar</button>
+                      <button className="btn btn-warning" data-bs-toggle="modal" data-bs-target="#reservaModal" onClick={() => setReserva({ ...reserva })}>Editar</button>
                       <button className="btn btn-danger" onClick={() => deletarReserva(reserva.id)}>Excluir</button>
                     </td>
                   </tr>

@@ -16,21 +16,22 @@ const FormReserva = () => {
     pacote,
     handleReservaClienteInputChange,
     handleReservaDestinoInputChange,
-    handleReservaPacoteInputChange } = useAppContext()
+    handleReservaPacoteInputChange,
+  } = useAppContext()
 
   const { id, cliente, dataPartida, dataRetorno, valor } = reserva
 
   const [total, setTotal] = useState(valor)
 
-
   useEffect(() => {
     validarReserva()
-    setTotal(valor)
-    console.log(reserva)
   }, [reserva])
 
-  /* useEffect(() => {
-  }, [destino, pacote, valor]) */
+
+  useEffect(() => {
+    setTotal(reserva.destino.valor + reserva.pacote.valor)
+    console.log("form: " + reserva.valor)
+  }, [pacote, destino])
 
 
   return (
@@ -55,6 +56,7 @@ const FormReserva = () => {
               <div className="mb-3">
                 <label htmlFor="cliente" className="form-label">Cliente:</label>
                 <select className='w-100 ' name="cliente" id="cliente" onChange={handleReservaClienteInputChange}>
+                  {id != 0 && <option key={0} value={reserva.cliente.id} selected>{reserva.cliente.nome}</option>}
                   {clientes.map(({ id, nome }, i) => (
                     <option key={i} value={id}>{nome}</option>
                   ))}
@@ -64,6 +66,7 @@ const FormReserva = () => {
               <div className="mb-3">
                 <label htmlFor="destino" className="form-label">Destino:</label>
                 <select className='w-100 ' name="destino" id="destino" onChange={handleReservaDestinoInputChange}>
+                  {id != 0 && <option key={0} value={reserva.destino.id} selected>{reserva.destino.nome}</option>}
                   {destinos.map(({ id, nome }, i) => (
                     <option key={i} value={id}>{nome}</option>
                   ))}
@@ -73,6 +76,7 @@ const FormReserva = () => {
               <div className="mb-3">
                 <label htmlFor="pacote" className="form-label">Pacote:</label>
                 <select className='w-100 ' name="pacote" id="pacote" onChange={handleReservaPacoteInputChange}>
+                  {id != 0 && <option key={0} value={reserva.pacote.id} selected>{reserva.pacote.nome}</option>}
                   {pacotes.map(({ id, nome }, i) => (
                     <option key={i} value={id}>{nome}</option>
                   ))}
@@ -88,7 +92,7 @@ const FormReserva = () => {
                 <input type="date" id="dataRetorno" name="dataRetorno" className="form-control" onChange={handleReservaInputChange} value={dataRetorno} required />
               </div>
               <div className="mb-3">
-                <h3>Total: R$ {total.toFixed(2)}</h3>
+                <h3>Total: R$ {valor.toFixed(2)}</h3>
               </div>
               <div className="d-flex gap-2 justify-content-end mb-3">
                 <a type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</a>

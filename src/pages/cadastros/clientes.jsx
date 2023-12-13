@@ -7,7 +7,7 @@ import moment from 'moment'
 
 const clientes = () => {
   const { listarCliente, deletarCliente } = useCliente()
-  const { clientes, setCliente } = useAppContext()
+  const { clientes, cliente, setCliente } = useAppContext()
 
   useEffect(() => {
     listarCliente()

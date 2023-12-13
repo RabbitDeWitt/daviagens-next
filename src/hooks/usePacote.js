@@ -53,6 +53,7 @@ const usePacote = () => {
   const deletarPacote = async (id) => {
     axios.delete(`${URL}/${id}`)
       .then(() => console.log('Exclusão feita com sucesso!!!'))
+      .catch(() => alert('Não pode deletar esse pacote: Existe uma reserva com esse pacote cadastro'))
       .finally(() => listarPacote())
   }
 

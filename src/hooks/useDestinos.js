@@ -37,6 +37,7 @@ const useDestinos = () => {
   const deletarDestino = async (id) => {
     axios.delete(`${URL}/${id}`)
       .then(() => console.log('Exclusão feita com sucesso!!!'))
+      .catch(() => alert('Não pode deletar esse destino: Existe uma reserva com esse destino cadastro'))
       .finally(() => listarDestinos())
   }
 

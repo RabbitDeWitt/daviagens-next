@@ -55,6 +55,7 @@ const useCliente = () => {
   const deletarCliente = async (id) => {
     axios.delete(`${URL}/${id}`)
       .then(() => console.log('Exclusão feita com sucesso!!!'))
+      .catch(() => alert('Não pode deletar esse cliente: Existe uma reserva com esse cliente cadastro'))
       .finally(() => listarCliente())
   }
 
