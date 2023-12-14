@@ -1,7 +1,25 @@
+import { useAppContext } from '@/context/appContext'
+import { useContato } from '@/hooks'
 import Head from 'next/head'
-import React from 'react'
+import { useRouter } from 'next/router'
+import React, { useEffect } from 'react'
 
 const contato = () => {
+  const router = useRouter()
+
+  const { contato, handleContatoInputChange, setContato, valido } = useAppContext()
+  const { validarContato, criarContato } = useContato()
+
+  useEffect(() => {
+    setContato({ id: 0, nome: '', email: '', mensagem: '' })
+  }, [])
+
+  useEffect(() => {
+    validarContato()
+  }, [contato])
+
+  const { nome, email, mensagem } = contato
+
   return (
     <>
       <Head>
@@ -24,18 +42,32 @@ const contato = () => {
           <form className="d-flex gap-5 flex-column">
             <div className="mb-3">
               <label htmlFor="nome" className="form-label text-white">Nome</label>
-              <input type="text" className="form-control" id="nome" required />
+              <input type="text" className="form-control" id="nome" name="nome" onChange={handleContatoInputChange} value={nome} required />
             </div>
             <div className="mb-3">
               <label htmlFor="email" className="form-label text-white">Email</label>
-              <input type="email" className="form-control" id="email" required />
+              <input type="email" className="form-control" id="email" name="email" onChange={handleContatoInputChange} value={email} required />
             </div>
             <div className="mb-3">
-              <label htmlFor="mensagem" className="form-label text-white">Mensagem</label>
-              <textarea className="form-control" id="mensagem" style={{ resize: 'none' }} rows={5}
+              <label htmlFor="mensagem" className="form-label text-white" >Mensagem</label>
+              <textarea
+                className="form-control"
+                id="mensagem"
+                name='mensagem'
+                style={{ resize: 'none' }}
+                rows={5}
+                onChange={handleContatoInputChange}
+                value={mensagem}
                 required></textarea>
             </div>
-            <button type="submit" className="btn btn-primary me-auto ">Enviar</button>
+            <a
+              type="submit"
+              className={`btn btn-primary me-auto ${valido == false ? 'disabled' : ''}`}
+              onClick={() => {
+                criarContato()
+                router.reload()
+              }}
+            >Enviar</a>
           </form>
         </section>
       </main>

@@ -17,8 +17,27 @@ export const navLinks = [
   },
   {
     label: "Cadastros",
-    link: "/cadastros/clientes"
+    link: "/cadastros"
   }
+]
+
+export const listas = [
+  {
+    name: 'clientes'
+  },
+  {
+    name: 'destinos'
+  },
+  {
+    name: 'pacotes'
+  },
+  {
+    name: 'contatos'
+  },
+  {
+    name: 'reservas'
+  },
+
 ]
 
 export const listaDestinos = [
