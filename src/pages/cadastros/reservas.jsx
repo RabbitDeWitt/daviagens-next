@@ -45,7 +45,7 @@ const Reservas = () => {
           pacote: { ...pacotes[0] },
           dataPartida: '',
           dataRetorno: '',
-          valor: { ...destinos[0] }.valor + { ...pacotes[0] }.valor
+          valor: { ...destinos[0] }.valor - ({ ...destinos[0] }.valor * ({ ...destinos[0] }.desconto / 100)) + { ...pacotes[0] }.valor
         })}>Cadastrar reserva</button>
 
       <FormReserva />

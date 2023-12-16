@@ -67,7 +67,7 @@ export const AppProvider = ({ children }) => {
   useEffect(() => {
     reserva.destino = destino.id === 0 ? { ...destinos[0] } : destino
     reserva.pacote = pacote.id === 0 ? { ...pacotes[0] } : pacote
-    reserva.valor = reserva.destino.valor + reserva.pacote.valor
+    reserva.valor = reserva.destino.valor - (reserva.destino.valor * (reserva.destino.desconto / 100)) + reserva.pacote.valor
     console.log("context: " + reserva.valor)
   }, [pacote, destino])
 

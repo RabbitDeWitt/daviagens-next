@@ -29,7 +29,7 @@ const FormReserva = () => {
 
 
   useEffect(() => {
-    setTotal(reserva.destino.valor + reserva.pacote.valor)
+    setTotal(reserva.destino.valor - (reserva.destino.valor * (reserva.destino.desconto / 100)) + reserva.pacote.valor)
     console.log("form: " + reserva.valor)
   }, [pacote, destino])
 
