@@ -1,13 +1,8 @@
-// import { useRouter } from "next/router"
-import { useState } from "react"
 import axios from 'axios'
 import { useAppContext } from "@/context/appContext"
-//import { listaDestinos } from "@/constants/data"
 
 const useDestinos = () => {
   const URL = 'http://localhost:8080/destinos'
-  // const router = useRouter()
-  // const [destinos, setDestinos] = useState([])
 
   const { destino, setDestinos, setValido } = useAppContext()
 
@@ -62,7 +57,6 @@ const useDestinos = () => {
   }
 
   return {
-    // destinos,
     listarDestinos,
     criarDestino,
     atualizarDestino,

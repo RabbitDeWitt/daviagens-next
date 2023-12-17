@@ -1,19 +1,10 @@
-// import { useRouter } from "next/router"
-// import { useState } from "react"
 import { useAppContext } from '@/context/appContext'
 import axios from 'axios'
 
 const useContato = () => {
   const URL = 'http://localhost:8080/contatos'
-  /* const router = useRouter()
-  const [contatos, setContatos] = useState([])
-  const [contato, setContato] = useState({ id: 0, nome: '', email: '', mensagem: '' }) */
 
   const { contato, setContatos, setValido } = useAppContext()
-
-  /*  const handleInputChange = e => {
-     setContato({ ...contato, [e.target.name]: e.target.value })
-   } */
 
   const validarContato = () => {
     const { nome, email, mensagem } = contato
@@ -37,12 +28,6 @@ const useContato = () => {
       .catch(err => console.log(err))
   }
 
-  /*  const buscarContato = async (id) => {
-     axios.get(`${URL}/${id}`)
-       .then(res => setContato(res.data))
-       .catch(err => console.log(err))
-   } */
-
   const atualizarContato = async (id) => {
     axios.put(`${URL}/${id}`, contato)
       .then(() => console.log("Cadastro atualizado!!!"))
@@ -57,11 +42,7 @@ const useContato = () => {
   }
 
   return {
-    // contatos,
-    // contato,
-    // handleInputChange,
     criarContato,
-    // buscarContato,
     listarContato,
     atualizarContato,
     deletarContato,

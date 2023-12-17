@@ -10,8 +10,6 @@ const index = () => {
 
   const [page, setPage] = useState(listas[0].name)
 
-
-
   return (
     <main className='container'>
       <select

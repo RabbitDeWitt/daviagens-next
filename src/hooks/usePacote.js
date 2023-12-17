@@ -1,19 +1,10 @@
-//import { useRouter } from "next/router"
-//import { useState } from "react"
 import { useAppContext } from '@/context/appContext'
 import axios from 'axios'
 
 const usePacote = () => {
   const URL = 'http://localhost:8080/pacotes'
-  //const router = useRouter()
-  /* const [pacotes, setPacotes] = useState([])
-  const [novoPacote, setNovoPacote] = useState({ id: 0, nome: '', valor: 0 })
 
-  const handleInputChange = e => {
-    setNovoPacote({ ...novoPacote, [e.target.name]: e.target.value })
-  } */
-
-  const { pacote, setPacote, setPacotes, setValido } = useAppContext()
+  const { pacote, setPacotes, setValido } = useAppContext()
 
   const validarPacote = () => {
     const { nome, valor } = pacote
@@ -37,12 +28,6 @@ const usePacote = () => {
       .catch(err => console.log(err))
   }
 
-  /* const buscarPacote = async (id) => {
-    axios.get(`${URL}/${id}`)
-      .then(res => setPacote(res.data))
-      .catch(err => console.log(err))
-  } */
-
   const atualizarPacote = async (id) => {
     axios.put(`${URL}/${id}`, pacote)
       .then(() => console.log("Cadastro atualizado!!!"))
@@ -58,11 +43,7 @@ const usePacote = () => {
   }
 
   return {
-    //pacotes,
-    //pacote,
-    //handleInputChange,
     criarPacote,
-    //buscarPacote,
     listarPacote,
     atualizarPacote,
     deletarPacote,
